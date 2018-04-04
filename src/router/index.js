@@ -4,6 +4,7 @@ import Find from '@/components/find/find'
 import Message from '@/components/message/message'
 import Mine from '@/components/mine/mine'
 import Home from '@/components/home/home'
+import Lists from '@/components/base/lists/lists'
 
 Vue.use(Router)
 
@@ -16,6 +17,7 @@ export default new Router({
       children: [
         {
           path: 'channel/:type',
+          component: Lists,
         },
       ]
     },

@@ -40,20 +40,20 @@
         font-size: px2rem(12px);
         border-top: 1px solid #dddddd;
         background: #ffffff;
-    }
-    .tab-footer {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        text-decoration: none;
-        justify-content: center;
-        align-items: center;
-        color: #424242;
-    }
-    .tab-footer.router-link-exact-active {
-        color: #3D5AFE;
-    }
-    .tab-footer i {
-        font-size: px2rem(26px);
+        .tab-footer {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            color: #424242;
+            &.router-link-exact-active {
+                color: #3D5AFE;
+            }
+            & i {
+                font-size: px2rem(26px);
+            }
+        }
     }
 </style>
