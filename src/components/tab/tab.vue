@@ -1,6 +1,6 @@
 <template>
     <div id="tabs">
-        <router-link to="/" class="tab-footer">
+        <router-link to="/channel" class="tab-footer">
             <i class="iconfont icon-homepage"></i>
             <span>首页</span>
         </router-link>
@@ -48,7 +48,7 @@
             justify-content: center;
             align-items: center;
             color: #424242;
-            &.router-link-exact-active {
+            &.router-link-active {
                 color: #3D5AFE;
             }
             & i {

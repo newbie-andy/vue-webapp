@@ -1,9 +1,9 @@
 <template>
     <div id="tabbar" ref="wrapper">
         <ul class="content">
-            <li><router-link class="page-head-link" to="/channel/sport">教育</router-link></li>
-            <li><router-link class="page-head-link" to="/channel/chain">财经</router-link></li>
-            <li><router-link class="page-head-link" to="/channel/education">教育</router-link></li>
+            <li v-for="(link, index) in links" :key="index">
+                <router-link class="page-head-link" to="/channel/chain">{{ link }}</router-link>
+            </li>
         </ul>
     </div>
 </template>
@@ -13,8 +13,27 @@
     export default {
         data() {
             return {
-
+                links: []
             }
+        },
+        created() {
+            this.$http({
+                method: 'post',
+                url: '/api/channel',
+                params: {
+                    appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
+                }
+            }).then((res) => {
+                console.log(res);
+                if(!!res.status) {
+                    this.links = res.data.result.result;
+                    console.log(this.links);
+                }else{
+                    console.log('soory, 服务器暂时没有数据');
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
         },
         mounted() {
             this.$nextTick(() => {

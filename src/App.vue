@@ -10,6 +10,7 @@
 <script>
 import Tab from './components/tab/tab';
 import './assets/js/rootfont.js';
+import Common from './assets/js/common.js';
 export default {
   name: 'App',
   components: {

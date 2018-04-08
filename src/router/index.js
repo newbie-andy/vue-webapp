@@ -9,14 +9,19 @@ import Lists from '@/components/base/lists/lists'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Home',
+      redirect: './channel'
+    },
+    {
+      path: '/channel/',
       component: Home,
       children: [
         {
-          path: 'channel/:type',
+          name: 'channel',
+          path: ':type',
           component: Lists,
         },
       ]
