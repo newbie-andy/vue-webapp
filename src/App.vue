@@ -25,12 +25,25 @@ export default {
     height: 100%;
     background: #f8f8f8;
   }
+  #home {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
   #tabs {
-    height: px2rem(60px);
+    display: flex;
+    height: px2rem(50px);
+    width: 100%;
+    font-size: px2rem(12px);
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+    z-index: 1000;
   }
   #app {
-    min-width: 100%;
-    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+    height: 100vh;
   }
     
 </style>

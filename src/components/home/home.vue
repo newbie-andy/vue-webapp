@@ -1,12 +1,12 @@
 <template>
-    <div class="home">
+    <div id="home">
         <tabbar ref="wrapper"></tabbar>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import Tabbar from '../tabbar/tabbar';
+    import Tabbar from '../tabbar/tabbar'
     export default {
         name: 'Home',
         data() {
@@ -21,5 +21,4 @@
 </script>
 
 <style lang="scss" scoped>
-
 </style>

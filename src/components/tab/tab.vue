@@ -31,15 +31,6 @@
 
 <style lang="scss" scoped>
     #tabs {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        width: 100%;
-        height: px2rem(50px);
-        font-size: px2rem(12px);
-        border-top: 1px solid #dddddd;
-        background: #ffffff;
         .tab-footer {
             display: flex;
             flex-direction: column;

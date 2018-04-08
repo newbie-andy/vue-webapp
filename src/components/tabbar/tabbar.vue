@@ -2,7 +2,7 @@
     <div id="tabbar" ref="wrapper">
         <ul class="content">
             <li v-for="(link, index) in links" :key="index">
-                <router-link class="page-head-link" to="/channel/chain">{{ link }}</router-link>
+                <router-link class="page-head-link" :to="{ name: 'channel', params: { type: link }}">{{ link }}</router-link>
             </li>
         </ul>
     </div>
@@ -25,11 +25,11 @@
                 }
             }).then((res) => {
                 console.log(res);
-                if(!!res.status) {
+                if(res.data.code == 10000) {
                     this.links = res.data.result.result;
                     console.log(this.links);
-                }else{
-                    console.log('soory, 服务器暂时没有数据');
+                }else if(res.data.code == 11010){
+                    console.log(res.data.msg);
                 }
             }).catch((error) => {
                 console.log(error);
@@ -48,7 +48,7 @@
 
 <style lang="scss" scoped>
     #tabbar {
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         display: flex;
@@ -56,6 +56,7 @@
         overflow: hidden;
         height: px2rem(42px);
         background: #ffffff;
+        z-index: 1000;
         ul {
             display: flex;
             flex-direction: row;
