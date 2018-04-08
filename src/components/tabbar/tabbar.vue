@@ -19,7 +19,7 @@
         created() {
             this.$http({
                 method: 'post',
-                url: '/api/channel',
+                url: '/api/jisuapi/channel',
                 params: {
                     appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
                 }

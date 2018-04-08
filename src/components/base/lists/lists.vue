@@ -34,7 +34,7 @@ export default {
     fetchNews() {
       this.$http({
             method: 'POST',
-            url: '/api/get',
+            url: '/api/jisuapi/get',
             params: {
                 channel: this.$route.params.type,
                 mun: 10,
