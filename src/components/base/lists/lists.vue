@@ -25,6 +25,8 @@ export default {
               scrollY: true,
               click: true,
           })
+          //再dom更新之后进行执行函数
+          this.fetchNews();
       })
   },
   watch: {

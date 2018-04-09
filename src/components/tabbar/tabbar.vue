@@ -28,6 +28,7 @@
                 if(res.data.code == 10000) {
                     this.links = res.data.result.result;
                     console.log(this.links);
+                    this.$router.push({ name: 'channel', params: { type: this.links[0] }});
                 }else if(res.data.code == 11010){
                     console.log(res.data.msg);
                 }
