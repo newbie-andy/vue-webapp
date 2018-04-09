@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <keep-alive>
-      <router-view/>
+      <router-view class="main"/>
     </keep-alive>
     <tab></tab>
   </div>
@@ -25,7 +25,7 @@ export default {
     height: 100%;
     background: #f8f8f8;
   }
-  #home {
+  #home, .main {
     display: flex;
     flex-direction: column;
     flex: 1;
