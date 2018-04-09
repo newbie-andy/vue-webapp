@@ -56,6 +56,7 @@
         overflow: hidden;
         height: px2rem(42px);
         background: #ffffff;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.3), 0 4px 5px rgba(0,0,0,0.1);
         z-index: 1000;
         ul {
             display: flex;

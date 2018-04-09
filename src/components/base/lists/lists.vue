@@ -68,6 +68,7 @@ export default {
           li {
               height: px2rem(120px);
               display: flex;
+              flex-direction: row;
               flex-wrap: nowrap;
               align-items: center;
               box-sizing: border-box;
@@ -75,9 +76,16 @@ export default {
               white-space:nowrap;
               padding: px2rem(10px) px2rem(10px);
               text-decoration: none;
+              border-bottom: 1px solid rgba(0,0,0,0.2);
               color: #000000;
-              & img {
-                width: 120px;
+              background: #ffffff;
+              img {
+                height: 100%;
+                max-width: px2rem(200px);
+              }
+              div {
+                display: flex;
+                align-items: flex-start;
               }
           }
       }

@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        target: 'https://way.jd.com/jisuapi',//设置你调用的接口域名和端口号 
+        target: 'https://way.jd.com/',//设置你调用的接口域名和端口号 
         changeOrigin: true,   
         secure: false,
         pathRewrite: {
