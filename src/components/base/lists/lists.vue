@@ -2,17 +2,21 @@
   <div class="lists" ref="news">
       <ul class="content">
           <li v-for="(content, index) in news" :key="index">
-              <img :src="content.pic" alt=""/>
-              <div>
-                <p>{{ content.title }}</p>
+              <div class="img-box" v-if="content.pic">
+                  <img :src="content.pic" alt="">
               </div>
+              <article>
+                <p>{{ content.title }}</p>
+              </article>
           </li>
       </ul>
+      <newsDetail :new-detail="news"></newsDetail>
   </div>
 </template>
 
 <script>
 import Bscroll from 'better-scroll';
+import NewsDetail from '../detail/detail';
 export default {
   data() {
       return {
@@ -55,6 +59,9 @@ export default {
             console.log(error);
         });
     }
+  },
+  components: {
+    NewsDetail
   }
 }
 </script>
@@ -81,13 +88,22 @@ export default {
               border-bottom: 1px solid rgba(0,0,0,0.2);
               color: #000000;
               background: #ffffff;
-              img {
+              .img-box {
+                position: relative;
                 height: 100%;
-                max-width: px2rem(200px);
+                width: px2rem(110px);
+                overflow: hidden;
+                img {
+                    position: absolute;
+                    width: 100%;
+                    min-height: 100%;
+                }
               }
-              div {
+              article {
                 display: flex;
+                flex: 1;
                 align-items: flex-start;
+                overflow: hidden;
               }
           }
       }
