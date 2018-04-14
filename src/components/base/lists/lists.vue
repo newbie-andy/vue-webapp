@@ -5,8 +5,13 @@
               <div class="img-box" v-if="content.pic">
                   <img :src="content.pic" alt="">
               </div>
-              <article>
+              <article :class="{'confirm-height': content.pic}">
                 <p>{{ content.title }}</p>
+                <div>
+                    <span class="category">{{ content.category }}</span>
+                    <span class="src">{{ content.src }}</span>
+                    <span class="time">{{ content.time }}</span>
+                </div>
               </article>
           </li>
       </ul>
@@ -75,7 +80,6 @@ export default {
           display: flex;
           flex-direction: column;
           li {
-              height: px2rem(120px);
               display: flex;
               flex-direction: row;
               flex-wrap: nowrap;
@@ -89,21 +93,47 @@ export default {
               color: #000000;
               background: #ffffff;
               .img-box {
-                position: relative;
-                height: 100%;
+                height: px2rem(120px);
                 width: px2rem(110px);
                 overflow: hidden;
                 img {
-                    position: absolute;
-                    width: 100%;
-                    min-height: 100%;
+                    height: 100%;
+                    min-width: 100%;
                 }
               }
               article {
+                height: inherit;
                 display: flex;
                 flex: 1;
+                flex-direction: column;
+                justify-content:space-between;
+                box-sizing: border-box;
                 align-items: flex-start;
+                padding: px2rem(10px) 0 px2rem(10px) px2rem(10px);
+                font-size: px2rem(16px); 
                 overflow: hidden;
+                &.confirm-height {
+                    height: px2rem(120px);
+                    div {
+                        margin-top: 0;
+                    }
+                }
+                p {
+                    width: 100%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                div {
+                    margin-top: px2rem(20px); 
+                    font-size: px2rem(14px);
+                    .category {
+                        padding: px2rem(2px) px2rem(4px);
+                        background: #3D5AFE;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: px2rem(4px);
+                    }
+                }
               }
           }
       }
