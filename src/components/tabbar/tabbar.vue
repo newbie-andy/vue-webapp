@@ -17,24 +17,7 @@
             }
         },
         created() {
-            this.$http({
-                method: 'post',
-                url: '/api/jisuapi/channel',
-                params: {
-                    appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
-                }
-            }).then((res) => {
-                console.log(res);
-                if(res.data.code == 10000) {
-                    this.links = res.data.result.result;
-                    console.log(this.links);
-                    this.$router.push({ name: 'channel', params: { type: this.links[0] }});
-                }else if(res.data.code == 11010){
-                    console.log(res.data.msg);
-                }
-            }).catch((error) => {
-                console.log(error);
-            });
+            
         },
         mounted() {
             this.$nextTick(() => {
@@ -43,6 +26,40 @@
                     click: true,
                 })
             })
+        },
+        activated() {
+            this.getNewsByType();
+        },
+        methods: {
+            getNewsByType: function() {
+                //判断是否存在缓存的数据
+                let channels = localStorage.getItem('channels');
+                if(channels) {
+                    this.links = JSON.parse(channels);
+                    this.$router.replace({ name: 'channel', params: { type: this.links[0] }});
+                }else{
+                    this.$http({
+                        method: 'post',
+                        url: '/api/jisuapi/channel',
+                        params: {
+                            appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
+                        }
+                    }).then((res) => {
+                        console.log(res);
+                        if(res.data.code == 10000) {
+                            this.links = res.data.result.result;
+                            //设置缓存
+                            localStorage.setItem('channels', JSON.stringify(this.links));
+                            console.log(this.links);
+                            this.$router.push({ name: 'channel', params: { type: this.links[0] }});
+                        }else if(res.data.code == 11010){
+                            console.log(res.data.msg);
+                        }
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                }
+            }
         }
     }
 </script>
@@ -73,6 +90,9 @@
                 padding: 0 px2rem(10px);
                 text-decoration: none;
                 color: #000000;
+                &.router-link-active {
+                    border-bottom: 2px solid #3D5AFE;
+                }
             }
         }
     }

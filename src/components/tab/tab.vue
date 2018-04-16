@@ -4,15 +4,15 @@
             <i class="iconfont icon-homepage"></i>
             <span>首页</span>
         </router-link>
-        <router-link to="/find" class="tab-footer">
+        <router-link to="/find" class="tab-footer" replace>
             <i class="iconfont icon-search"></i>
             <span>发现</span>
         </router-link>
-        <router-link to="/message" class="tab-footer">
+        <router-link to="/message" class="tab-footer" replace>
             <i class="iconfont icon-message"></i>
             <span>消息</span>
         </router-link>
-        <router-link to="/mine" class="tab-footer">
+        <router-link to="/mine" class="tab-footer" replace>
             <i class="iconfont icon-mine"></i>
             <span>我的</span>
         </router-link>
@@ -25,7 +25,11 @@
             return {
 
             }
+        },
+        methods: {
+            
         }
+        
     }
 </script>
 

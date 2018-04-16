@@ -29,13 +29,12 @@ export default {
       }
   },
   mounted() {
+      this.fetchNews();
       this.$nextTick(() => {
           this.scroll = new Bscroll(this.$refs.news, {
               scrollY: true,
-              click: true,
+              tap: true,
           })
-          //再dom更新之后进行执行函数
-          this.fetchNews();
       })
   },
   watch: {
