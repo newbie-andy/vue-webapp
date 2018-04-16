@@ -25,47 +25,72 @@ import NewsDetail from '../detail/detail';
 export default {
   data() {
       return {
+        config: {
+            page: 0,
+            newsParams: {
+                method: 'POST',
+                url: '/api/jisuapi/get',
+                params: {
+                    channel: '',
+                    mun: 10,
+                    start: 0,
+                    appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486',
+                }
+            }
+        },
         news: []
       }
   },
   mounted() {
-      this.fetchNews();
+      this.fetchNews(this.config.newsParams);
       this.$nextTick(() => {
-          this.scroll = new Bscroll(this.$refs.news, {
-              scrollY: true,
-              tap: true,
-              bounce:true,//超出部分会有动画，默认值为true
-              bounceTime: 500,//回弹动画的时间，默认值为800
-              momentum: true,//计算动量，默认值为true
-              resizePolling: 60,//窗口的尺寸发生改变，需要对better-scroll做重新计算
-          })
+          this.initScroll();
       })
   },
   watch: {
-    '$route': 'fetchNews'
+    '$route': 'fetchNewsStart'
   },
   methods: {
-    fetchNews() {
-      this.$http({
-            method: 'POST',
-            url: '/api/jisuapi/get',
-            params: {
-                channel: this.$route.params.type,
-                mun: 10,
-                start: 0,
-                appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486',
+    initScroll() {
+        this.scroll = new Bscroll(this.$refs.news, {
+            startY: 0,
+            scrollY: true,
+            tap: true,
+            bounce:true,//超出部分会有动画，默认值为true
+            bounceTime: 500,//回弹动画的时间，默认值为800
+            momentum: true,//计算动量，默认值为true
+            resizePolling: 60,//窗口的尺寸发生改变，需要对better-scroll做重新计算,
+            probeType: 2,
+            pullUpLoad: {
+                threshold: 50,
+                stop: 20
             }
-        }).then((res) => {
-            console.log(res);
+        });
+        this.scroll.on('pullingUp', () => {
+            this.config.newsParams.params.start = (++this.config.page) * this.config.newsParams.params.mun + 1;
+            console.log(this.config.page);
+            this.fetchNews(this.config.newsParams);
+            this.scroll.finishPullUp()
+        })
+    },
+    fetchNews(config) {
+      this.$http(config).then((res) => {
             if(res.data.code == 10000) {
-              console.log(res.data.result.result);
-              this.news = res.data.result.result.list;
+              this.news = this.news.concat(res.data.result.result.list);
             }else if(res.data.code == 11010){
                 console.log(res.data.msg);
             }
         }).catch((error) => {
             console.log(error);
         });
+    },
+    fetchNewsStart() {
+        this.config.page = 0;
+        console.log(this.$route.params.type);
+        this.config.newsParams.params.channel = this.$route.params.type;
+        this.config.newsParams.params.start = 0;
+        this.news = [];
+        this.fetchNews(this.config.newsParams);
     }
   },
   components: {

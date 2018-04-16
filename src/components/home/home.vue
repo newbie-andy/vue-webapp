@@ -1,9 +1,7 @@
 <template>
     <div id="home">
         <tabbar ref="wrapper"></tabbar>
-        <keep-alive>
-            <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
     </div>
 </template>
 
