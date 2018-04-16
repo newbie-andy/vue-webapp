@@ -34,6 +34,10 @@ export default {
           this.scroll = new Bscroll(this.$refs.news, {
               scrollY: true,
               tap: true,
+              bounce:true,//超出部分会有动画，默认值为true
+              bounceTime: 500,//回弹动画的时间，默认值为800
+              momentum: true,//计算动量，默认值为true
+              resizePolling: 60,//窗口的尺寸发生改变，需要对better-scroll做重新计算
           })
       })
   },

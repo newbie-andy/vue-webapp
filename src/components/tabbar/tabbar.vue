@@ -16,9 +16,6 @@
                 links: []
             }
         },
-        created() {
-            
-        },
         mounted() {
             this.$nextTick(() => {
                 this.scroll = new Bscroll(this.$refs.wrapper, {
@@ -28,6 +25,7 @@
             })
         },
         activated() {
+            //这里我们用这个生命周期是由于activated能监听组建的激活与否状态
             this.getNewsByType();
         },
         methods: {
