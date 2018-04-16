@@ -3,7 +3,7 @@
       <ul class="content">
           <li v-for="(content, index) in news" :key="index">
               <div class="img-box" v-if="content.pic">
-                  <img :src="content.pic" alt="">
+                  <img v-lazy="content.pic" >
               </div>
               <article :class="{'confirm-height': content.pic}">
                 <p>{{ content.title }}</p>
@@ -58,7 +58,7 @@ export default {
         }).then((res) => {
             console.log(res);
             if(res.data.code == 10000) {
-              console.log(res.data.result.result.list);
+              console.log(res.data.result.result);
               this.news = res.data.result.result.list;
             }else if(res.data.code == 11010){
                 console.log(res.data.msg);
