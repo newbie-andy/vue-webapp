@@ -1,21 +1,21 @@
 <template>
   <div class="lists" ref="news">
       <ul class="content">
-          <li v-for="(content, index) in news" :key="index">
+          <li v-for="(content, index) in news" :key="index" @click="showDetailNewsPage(content)">
               <div class="img-box" v-if="content.pic">
                   <img v-lazy="content.pic" >
               </div>
               <article :class="{'confirm-height': content.pic}">
                 <p>{{ content.title }}</p>
                 <div>
-                    <span class="category">{{ content.category }}</span>
-                    <span class="src">{{ content.src }}</span>
-                    <span class="time">{{ content.time }}</span>
+                    <span class="category" v-if="content.category">{{ content.category }}</span>
+                    <span class="src" v-if="content.src">{{ content.src }}</span>
+                    <span class="time" v-if="content.time">{{ content.time }}</span>
                 </div>
               </article>
           </li>
       </ul>
-      <newsDetail :new-detail="news"></newsDetail>
+      <newsDetail :new-detail="newsDetailConfig"></newsDetail>
   </div>
 </template>
 
@@ -38,7 +38,11 @@ export default {
                 }
             }
         },
-        news: []
+        news: [],
+        newsDetailConfig: {
+            newsdetail: {},
+            isShow: false
+        }
       }
   },
   mounted() {
@@ -55,7 +59,7 @@ export default {
         this.scroll = new Bscroll(this.$refs.news, {
             startY: 0,
             scrollY: true,
-            tap: true,
+            click: true,
             bounce:true,//超出部分会有动画，默认值为true
             bounceTime: 500,//回弹动画的时间，默认值为800
             momentum: true,//计算动量，默认值为true
@@ -70,8 +74,14 @@ export default {
             this.config.newsParams.params.start = (++this.config.page) * this.config.newsParams.params.mun + 1;
             console.log(this.config.page);
             this.fetchNews(this.config.newsParams);
-            this.scroll.finishPullUp()
+            this.scroll.finishPullUp();
         })
+    },
+    disable() {
+        this.scroll && this.scroll.disable()
+    },
+    enable() {  
+        this.scroll && this.scroll.enable()
     },
     fetchNews(config) {
       this.$http(config).then((res) => {
@@ -91,6 +101,13 @@ export default {
         this.config.newsParams.params.start = 0;
         this.news = [];
         this.fetchNews(this.config.newsParams);
+    },
+    showDetailNewsPage(newsdetail) {
+        this.disable();
+        this.newsDetailConfig = {
+            newsdetail: newsdetail,
+            isShow: true
+        };  
     }
   },
   components: {
