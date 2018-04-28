@@ -15,7 +15,7 @@
               </article>
           </li>
       </ul>
-      <newsDetail :new-detail="newsDetailConfig"></newsDetail>
+      <newsDetail :new-detail="newsDetailConfig" @canCcroll="enable"></newsDetail>
   </div>
 </template>
 

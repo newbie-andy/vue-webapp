@@ -25,7 +25,7 @@ export default {
     height: 100%;
     background: #f8f8f8;
   }
-  #home, .main {
+  #home, .main, #mine {
     display: flex;
     flex-direction: column;
     flex: 1;

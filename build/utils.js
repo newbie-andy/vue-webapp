@@ -65,7 +65,7 @@ exports.cssLoaders = function (options) {
       {
         loader: 'sass-resources-loader',
         options: {
-          resources: ['./src/assets/scss/globel/*.scss']
+          resources: ['./src/assets/scss/globel/*.scss','./src/assets/scss/*.scss']
         }
       }
     ),
