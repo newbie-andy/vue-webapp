@@ -8,7 +8,7 @@
             <i class="iconfont icon-search"></i>
             <span>发现</span>
         </router-link>
-        <router-link to="/find" class="tab-footer center" replace>
+        <router-link to="/examples" class="tab-footer center" replace>
             <div>
                 <i class="iconfont icon-integral"></i>
             </div>

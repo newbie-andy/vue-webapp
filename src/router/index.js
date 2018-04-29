@@ -5,6 +5,7 @@ import Message from '@/components/message/message'
 import Mine from '@/components/mine/mine'
 import Home from '@/components/home/home'
 import Lists from '@/components/base/lists/lists'
+import Examples from '@/components/examples/examples'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/find',
       name: 'Find',
       component: Find
+    },
+    {
+      path: '/examples',
+      name: 'Examples',
+      component: Examples
     },
     {
       path: '/message',
