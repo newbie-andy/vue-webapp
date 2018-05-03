@@ -6,5 +6,10 @@ p.art_p {
     }
 }
 .male {
-    
+    font-family: 'iconfont';
+    @extend .icon-like_fill;
+}
+.female {
+    font-family: 'iconfont';
+    @extend .icon-like_fill;
 }

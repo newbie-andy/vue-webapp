@@ -38,7 +38,9 @@
                 }else{
                     this.$http({
                         method: 'post',
+                        // https://way.jd.com/
                         url: '/api/jisuapi/channel',
+                        // url: 'https://way.jd.com/jisuapi/channel',
                         params: {
                             appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
                         }

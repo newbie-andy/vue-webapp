@@ -62,17 +62,28 @@
             background: -webkit-linear-gradient(136deg, #fe7b7b, #fed190);
             background: linear-gradient(136deg, #fe7b7b, #fed190);
             clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 50% 100%, 0% 80%, 0% 60%);
-            .user-box {
-                width: px2rem(100px);
-                height: px2rem(100px);
-                border-radius: 50%;
-                overflow: hidden;
+            .header-img {
+                position: relative;
+                .user-box {
+                    width: px2rem(100px);
+                    height: px2rem(100px);
+                    border-radius: 50%;
+                    overflow: hidden;
+                }
+                i {
+                    position: absolute;
+                    top: 20%;
+                    left: 98%;
+                    font-size: px2rem(18px);
+                    color:cadetblue;
+                }
             }
             .name {
                 margin-top: px2rem(15px);
                 font-size: px2rem(16px);
                 color: rgba(0,0,0,0.7);
             }
+
         }
         .list-box {
             margin-top: px2rem(10px);

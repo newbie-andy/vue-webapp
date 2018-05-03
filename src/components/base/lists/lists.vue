@@ -24,6 +24,8 @@ import Bscroll from 'better-scroll';
 import NewsDetail from '../detail/detail';
 export default {
   data() {
+      // https://way.jd.com/
+    // url: '/api/jisuapi/channel',
       return {
         config: {
             page: 0,
