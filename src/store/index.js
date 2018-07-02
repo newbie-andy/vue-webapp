@@ -7,6 +7,7 @@ const store = new Vuex.Store({
         person: {
             name: '张烁',
             nickName: 'Zsing',
+            avatar: 'http://img.zcool.cn/community/018883596491eca8012193a322385c.png@2o.png',
             age: 25,
             sex: 'male',
             job: 'Web前端开发工程师',
@@ -21,8 +22,15 @@ const store = new Vuex.Store({
                     province: 'Anhui',
                     city: 'Jieshou',
                }
-            },
-            avatar: 'http://img.zcool.cn/community/018883596491eca8012193a322385c.png@2o.png'
+            }
+        },
+        icons: {
+            name: 'icon-mine',
+            nickName: 'icon-label',
+            age: 'icon-integral',
+            sex: 'icon-like',
+            job: 'icon-stealth',
+            address: 'icon-coordinates'
         }
     }
 })

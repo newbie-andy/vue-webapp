@@ -9,7 +9,7 @@
         </section>
 
         <ul class="list-box">
-            <li v-for="(list, index) in lists" :key="index">
+            <li v-for="(list, index) in lists" :key="index" @click="switchComponent(list.componentNeed)"> 
                 <i :class="['iconfont', list.icon]"></i>
                 <div>
                     <span>{{ list.strings }}</span>
@@ -17,11 +17,15 @@
                 </div>
             </li>
         </ul>
+        <!-- 通过store进行获取用户的信息 -->
+        <component :is="currentComponentShow" :component-config="compConfig"></component>
+
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex'
+    import personDetail from '../base/detail/personDetail'
     export default {
         name: 'Mine',
         data() {
@@ -29,7 +33,8 @@
                 lists: [
                     {
                         icon: 'icon-manage',
-                        strings: '详细信息'
+                        strings: '详细信息',
+                        componentNeed: 'personDetail'
                     },
                     {
                         icon: 'icon-order',
@@ -39,13 +44,28 @@
                         icon: 'icon-prompt',
                         strings: '系统设置'
                     }
-                ]
+                ],
+                currentComponentShow: '',
+                compConfig: {
+                    isShow: false
+                }
             }
         },
         computed: {
             ...mapState({
                 personInfo: 'person',
             })
+        },
+        methods: {
+            switchComponent: function(which) {
+                this.currentComponentShow = which;
+                this.compConfig = {
+                    isShow: true
+                };
+            }
+        },
+        components: {
+            personDetail
         }
     }
 </script>
