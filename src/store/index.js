@@ -10,7 +10,7 @@ const store = new Vuex.Store({
             avatar: 'http://img.zcool.cn/community/018883596491eca8012193a322385c.png@2o.png',
             age: 25,
             sex: 'male',
-            job: 'Web前端开发工程师',
+            job: 'newbie on the web',
             address: {
                zh:{
                     state: '中国',

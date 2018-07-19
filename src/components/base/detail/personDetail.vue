@@ -1,7 +1,7 @@
 <template>
     <transition name="show-person">
         <div class="user-info" v-show="componentConfig.isShow">
-            <backNavigator></backNavigator>
+            <backNavigator @close-detail="closeDetail"></backNavigator>
             <section class="user-message-box">
                 <div class="user-avatar">
                     <img :src="personInfo.avatar"/>
@@ -9,8 +9,8 @@
                 <ul class="user-message">
                     <li v-for="(person, index) in doneTodosCount" :key="index" class="user-message-list">
                         <i :class="['iconfont', 'icon', persoIcons[index]]"></i>
-                        <span v-if="'sex' == index">{{ ('male' === person) ? '男' : '女' }}</span>
-                        <span v-else-if="'address' == index">{{ person.zh.state + person.zh.province + person.zh.city }}</span>
+                        <span v-if="'sex' == index">{{ ('male' === person) ? 'guy' : 'girl' }}</span>
+                        <span v-else-if="'address' == index">{{ person.en.state + ' ' + person.en.province + ' ' + person.en.city }}</span>
                         <span v-else>{{ person }}</span>
                     </li>
                 </ul>
@@ -31,10 +31,12 @@ export default {
         }
     },
     mounted() {
-        
+        console.log(this.componentConfig);
     },
     methods: {
-        
+        closeDetail: function() {
+            this.componentConfig.isShow = false;
+        } 
     },
     computed: {
         ...mapState({
@@ -42,12 +44,12 @@ export default {
             persoIcons: 'icons'
         }),
         doneTodosCount: function() {
-            //处理显示的数据，因为头像不需要图标，所以我们这里进行了过滤的处理
-            let person = this.personInfo;
-            let hasAvatar = person.hasOwnProperty('avatar');
-            if(hasAvatar) {
-                delete person.avatar
+            //处理显示的数据，因为头像不需要图标，所以我们这里进行了过滤的处理,这里要注意js浅拷贝与深拷贝的区别
+            let person = {};
+            for(let k in this.personInfo) {
+                person[k] = this.personInfo[k]
             }
+            delete person.avatar
             return person;
         }
     },
