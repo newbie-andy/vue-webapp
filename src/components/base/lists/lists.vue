@@ -1,16 +1,16 @@
 <template>
   <div class="lists" ref="news">
       <ul class="content">
-          <li v-for="(content, index) in news" :key="index" @click="showDetailNewsPage(content)">
-              <div class="img-box" v-if="content.pic">
-                  <img v-lazy="content.pic" >
+          <li v-for="(content, index) in news" :key="index" @click="showDetailNewsPage(content.newsId)">
+              <div class="img-box" v-if="content.newsImg">
+                  <img v-lazy="content.newsImg" >
               </div>
-              <article :class="{'confirm-height': content.pic}">
+              <article :class="{'confirm-height': content.newsImg}">
                 <p>{{ content.title }}</p>
                 <div>
-                    <span class="category" v-if="content.category">{{ content.category }}</span>
-                    <span class="src" v-if="content.src">{{ content.src }}</span>
-                    <span class="time" v-if="content.time">{{ content.time }}</span>
+                    <span class="category" v-if="content.source">{{ content.source }}</span>
+                    <!-- <span class="source" v-if="content.source">{{ content.source }}</span> -->
+                    <span class="time" v-if="content.publishTime">{{ content.publishTime }}</span>
                 </div>
               </article>
           </li>
@@ -28,14 +28,13 @@ export default {
     // url: '/api/jisuapi/channel',
       return {
         config: {
-            page: 0,
             newsParams: {
                 method: 'POST',
-                url: '/api/jisuapi/get',
+                url: '/api/zhixunkeji/sjzh1011',
                 params: {
-                    channel: '',
-                    mun: 10,
-                    start: 0,
+                    category: '',
+                    updateTime: '',
+                    page: 1,
                     appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486',
                 }
             }
@@ -48,6 +47,10 @@ export default {
       }
   },
   mounted() {
+      let channels = localStorage.getItem('channels');
+      this.links = JSON.parse(channels);
+      this.config.newsParams.params.category = (this.links)[0];
+      this.config.newsParams.params.updateTime = new Date().Format("yyyy-MM-dd hh:mm:ss");
       this.fetchNews(this.config.newsParams);
       this.$nextTick(() => {
           this.initScroll();
@@ -73,7 +76,7 @@ export default {
             }
         });
         this.scroll.on('pullingUp', () => {
-            this.config.newsParams.params.start = (++this.config.page) * this.config.newsParams.params.mun + 1;
+            this.config.newsParams.params.page = this.config.newsParams.params.page + 1;
             console.log(this.config.page);
             this.fetchNews(this.config.newsParams);
             this.scroll.finishPullUp();
@@ -88,7 +91,7 @@ export default {
     fetchNews(config) {
       this.$http(config).then((res) => {
             if(res.data.code == 10000) {
-              this.news = this.news.concat(res.data.result.result.list);
+              this.news = this.news.concat(res.data.result.result.newsList);
             }else if(res.data.code == 11010){
                 console.log(res.data.msg);
             }
@@ -97,19 +100,31 @@ export default {
         });
     },
     fetchNewsStart() {
-        this.config.page = 0;
-        console.log(this.$route.params.type);
-        this.config.newsParams.params.channel = this.$route.params.type;
-        this.config.newsParams.params.start = 0;
+        this.config.newsParams.params.page = 1;
+        this.config.newsParams.params.category = this.$route.params.type;
         this.news = [];
         this.fetchNews(this.config.newsParams);
     },
-    showDetailNewsPage(newsdetail) {
-        this.disable();
-        this.newsDetailConfig = {
-            newsdetail: newsdetail,
-            isShow: true
-        };  
+    showDetailNewsPage(newId) {
+        console.log(newId);
+        this.$http({
+                method: 'POST',
+                url: '/api/zhixunkeji/sjzh1012',
+                params: {
+                    newsId: newId,
+                    appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486',
+                }
+            }).then((res) => {
+            if(res.data.code == 10000) {
+                this.disable();
+                this.newsDetailConfig.newsdetail = res.data.result.result;
+                this.newsDetailConfig.isShow = true;
+            }else if(res.data.code == 11010){
+                console.log(res.data.msg);
+            }
+        }).catch((error) => {
+            console.log(error);
+        });
     }
   },
   components: {

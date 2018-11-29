@@ -39,8 +39,8 @@
                     this.$http({
                         method: 'post',
                         // https://way.jd.com/
-                        url: '/api/jisuapi/channel',
-                        // url: 'https://way.jd.com/jisuapi/channel',
+                        url: '/api/zhixunkeji/sjzh1010',
+                        // url: 'https://way.jd.com/zhixunkeji/sjzh1010',
                         params: {
                             appkey: '1e58cd8eefb3ed489f9f3ddc00ad5486'
                         }
@@ -48,6 +48,8 @@
                         console.log(res);
                         if(res.data.code == 10000) {
                             this.links = res.data.result.result;
+                            console.log( res.data.result.result);
+                            console.log('tese');
                             //设置缓存
                             localStorage.setItem('channels', JSON.stringify(this.links));
                             console.log(this.links);

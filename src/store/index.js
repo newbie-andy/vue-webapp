@@ -8,7 +8,7 @@ const store = new Vuex.Store({
             name: '张烁',
             nickName: 'Zsing',
             avatar: 'http://img.zcool.cn/community/018883596491eca8012193a322385c.png@2o.png',
-            age: 25,
+            age: 24,
             sex: 'male',
             job: 'newbie on the web',
             address: {
